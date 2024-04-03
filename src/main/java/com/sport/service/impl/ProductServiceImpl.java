@@ -28,6 +28,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductEntity> findByCategoryName(Integer pageNo, Integer quantity, String name) {
         Pageable pageable = PageRequest.of(pageNo - 1, quantity);
-        return productRepository.findByCategoryEntitiesCategoryNameIn(name);
+        return productRepository.findByCategoryEntitiesCategoryNameLike(name, pageable);
     }
 }

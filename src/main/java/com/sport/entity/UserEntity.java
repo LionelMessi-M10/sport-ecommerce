@@ -29,7 +29,7 @@ public class UserEntity {
 	private Long id;
 	
 	@Lob
-    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
+    @Column(name = "image", columnDefinition = "BYTEA")
     private String image;
 	
 	@Column(name = "username", length = 255)
@@ -73,4 +73,7 @@ public class UserEntity {
 	
 	@OneToMany(mappedBy = "userEntity")
 	private List<CartEntity> cartEntities = new ArrayList<>();
+
+	@OneToMany(mappedBy = "userEntity")
+	private List<CustomerAddressEntity> customerAddressEntities = new ArrayList<>();
 }

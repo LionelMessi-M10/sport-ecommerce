@@ -28,7 +28,7 @@ public class ProductEntity {
 	private Long id;
 	
 	@Lob
-    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
+    @Column(name = "image", columnDefinition = "BYTEA")
     private String image;
 	
 	@Column(name = "product_name")
