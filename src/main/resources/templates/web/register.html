@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www/thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <title>Sport Ecommerce - Register</title>
@@ -8,7 +8,7 @@
     <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link href="/shop/img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,11 +24,11 @@
     />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/shop/lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="/shop/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/shop/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -54,8 +54,8 @@
                         My Account
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Sign in</button>
-                        <button class="dropdown-item" type="button">Sign up</button>
+                        <a th:href="@{/shop/login}" class="dropdown-item" type="button">Login</a>
+                        <a th:href="@{/shop/register}" class="dropdown-item" type="button">Register</a>
                     </div>
                 </div>
                 <div class="btn-group mx-2">
@@ -113,7 +113,7 @@
         <div class="col-lg-4">
             <a href="" class="text-decoration-none">
             <span class="h1 text-uppercase text-primary bg-dark px-2"
-            >Multi</span
+            >Sport</span
             >
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1"
                 >Shop</span
@@ -269,7 +269,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Create new account</h4>
-                        <form>
+                        <form th:action="@{/register}" th:object="${users}" method="POST">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="firstname">First Name</label>
@@ -512,14 +512,14 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/shop/lib/easing/easing.min.js"></script>
+<script src="/shop/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Contact Javascript File -->
-<script src="mail/jqBootstrapValidation.min.js"></script>
-<script src="mail/contact.js"></script>
+<script src="/shop/mail/jqBootstrapValidation.min.js"></script>
+<script src="/shop/mail/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="/shop/js/main.js"></script>
 </body>
 </html>

@@ -15,17 +15,22 @@ public class HomeController {
     private ProductService productService;
 
     @GetMapping(value = {"/", "/home"})
-    public String home(Model model){
+    public String home(){
         return "web/home";
     }
 
     @GetMapping("/login")
-    public String loginPage(){
-        return "login";
+    public String login(){
+        return "web/login";
     }
 
     @GetMapping("/register")
     public String register(){
-        return "register";
+        return "web/register";
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "web/profile";
     }
 }
