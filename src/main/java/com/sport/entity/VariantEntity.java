@@ -8,9 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "variants")
 public class VariantEntity {
@@ -18,13 +24,13 @@ public class VariantEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "variant_name", length = 255)
-	private String variantName;
-	
-	@Column(name = "variant_value", length = 255)
-	private String variantValue;
-	
+
+	@Column(name = "size")
+	private String size;
+
+	@Column(name = "color")
+	private String colorPro;
+
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private ProductEntity productEntity;

@@ -2,6 +2,11 @@ package com.sport.entity;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,9 +15,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "order_statuses")
 public class OrderStatusEntity {
@@ -20,22 +31,26 @@ public class OrderStatusEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "status_name", length = 255)
 	private String statusName;
-	
+
 	@Column(name = "created_at")
+	@CreatedDate
 	private Date createdAt;
-	
+
 	@Column(name = "modified_at")
+	@LastModifiedDate
 	private Date modifiedAt;
-	
+
 	@Column(name = "created_by")
-	private Integer createdBy;
-	
+	@CreatedBy
+	private String createdBy;
+
 	@Column(name = "modified_by")
-	private Integer modifiedBy;
-	
+	@LastModifiedBy
+	private String modifiedBy;
+
 	@ManyToOne
 	@JoinColumn(name = "order_status_id")
 	private OrderEntity orderEntity;

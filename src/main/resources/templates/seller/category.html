@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Loại sản phẩm</title>
+	<link rel="shortcut icon" type="image/png" href="/seller/favicon/icon-shop.png" />
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="/seller/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/seller/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/seller/css/AdminLTE.css">
+	<link rel="stylesheet" href="/seller/css/_all-skins.min.css">
+	<link rel="stylesheet" href="/seller/css/jquery-ui.css">
+	<link rel="stylesheet" href="/seller/css/style.css" />
+	<script src="/seller/js/angular.min.js"></script>
+	<script src="/seller/js/app.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header th:replace="~{seller/layout/header :: header}"></header>
+
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="~{seller/layout/sidebar :: sidebar}"></aside>
+
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					<b>Quản lý Loại Sản Phẩm</b>
+				</h1>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="col-xs-12">
+					<div class="box">
+						<div class="box-header">
+							<a class="btn btn-success" data-toggle="modal" data-target="#exampleAddCategoryModal"
+								data-whatever="@mdo">+Thêm</a>
+
+							<div class="box-tools">
+								<div class="input-group input-group-sm" style="width: 150px;">
+									<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+									<div class="input-group-btn">
+										<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th align="center">ID</th>
+										<th align="center">Tên Loại Sản Phẩm</th>
+										<th align="center">Tùy chọn</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="category : ${categoryPage.content}">
+										<td th:text="${category.id}"></td>
+										<td th:text="${category.categoryName}"></td>
+										<td>
+											<a th:href="@{/seller/edit-category(id=${category.id})}" class="btn btn-success">Sửa</a>
+											<a th:href="@{/seller/delete-category(id=${category.id})}" class="btn btn-danger"
+												onclick="return confirm('Bạn có chắc chắn xóa loại sản phẩm này không?');">Xóa</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="box-footer clearfix">
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li th:if="${currentPage > 1}"><a th:href="@{'?pageNo='+${currentPage-1}}">
+											<< </a>
+									</li>
+									<li th:each="item : ${#numbers.sequence(1, totalPage)}"
+										th:classappend="${currentPage == item ? 'active' : ''}"><a th:href="@{'?pageNo='+${item}}"
+											th:text="${item}"></a></li>
+									<li th:if="${currentPage < totalPage}"><a th:href="@{'?pageNo='+${currentPage+1}}">>></a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				<!-- /.box -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+	</div>
+	<!-- ./wrapper -->
+
+	<div class="modal fade" id="exampleAddCategoryModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleAddCategoryModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleAddCategoryModalLabel">New Category</h5>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/seller/add-category}" method="POST" th:object="${category}">
+						<div class="form-group">
+							<label for="name" class="col-form-label">Category Name:</label>
+							<input type="text" class="form-control" id="name" name="categoryName" th:field="*{categoryName}">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery 3 -->
+
+	<script src="/seller/js/jquery.min.js"></script>
+	<script src="/seller/js/jquery-ui.js"></script>
+
+	<script>
+		
+	</script>
+
+	<script src="/seller/js/bootstrap.min.js"></script>
+	<script src="/seller/js/adminlte.min.js"></script>
+	<script src="/seller/js/dashboard.js"></script>
+	<script src="/seller/js/function.js"></script>
+</body>
+
+</html>

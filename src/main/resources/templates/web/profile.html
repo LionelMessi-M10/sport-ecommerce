@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>SportShop - Profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link href="/web/img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,11 +24,11 @@
     />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/web/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -217,8 +217,8 @@
                         id="navbarCollapse"
                 >
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
+                        <a href="/shop/home" class="nav-item nav-link active">Home</a>
+                        <a href="/shop/store" class="nav-item nav-link">Shop</a>
                         <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a
@@ -228,11 +228,11 @@
                             >Pages <i class="fa fa-angle-down mt-1"></i
                             ></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                <a href="/shop/cart" class="dropdown-item">Shopping Cart</a>
+                                <a href="/shop/checkout" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="/shop/contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
@@ -263,13 +263,10 @@
     <div class="container-fluid pb-5">
         <div class="row justify-content-md-center">
             <div class="card-wrapper col-12 col-md-8 mt-5">
-                <div class="brand text-center mb-3">
-                    <a href="/"><img src="/img/logo.png" /></a>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Your profile</h4>
-                        <form>
+                        <form th:action="@{/shop/profile}" th:object="${userDTO}" method="POST">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="firstname">First Name</label>
@@ -278,6 +275,7 @@
                                             type="text"
                                             class="form-control"
                                             required=""
+                                            th:field="*{firstName}"
                                     />
                                 </div>
                                 <div class="form-group col-md-6">
@@ -288,6 +286,7 @@
                                             class="form-control"
                                             name="lastname"
                                             required=""
+                                            th:field="*{lastName}"
                                     />
                                 </div>
                             </div>
@@ -302,6 +301,7 @@
                                             name="userName"
                                             required=""
                                             autofocus=""
+                                            th:field="*{userName}"
                                     />
                                 </div>
                                 <div class="form-group col-md-4">
@@ -313,6 +313,7 @@
                                             name="telephone"
                                             required=""
                                             autofocus=""
+                                            th:field="*{telephone}"
                                     />
                                 </div>
                             </div>
@@ -325,18 +326,25 @@
                                         class="form-control"
                                         name="email"
                                         required=""
+                                        th:field="*{email}"
                                 />
                             </div>
 
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" id="address" class="form-control" name="address" required=""/>
+                                <input type="text" id="address" class="form-control" name="address" required="" th:field="*{address}"/>
                             </div>
 
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{createdAt}">
+                            <input type="hidden" th:field="*{modifiedAt}">
+                            <input type="hidden" th:field="*{enabled}">
+                            <input type="hidden" th:field="*{role}">
+
                             <div class="form-group">
-                                <a href="/index.html" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     Save
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -459,14 +467,14 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/web/lib/easing/easing.min.js"></script>
+<script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Contact Javascript File -->
-<script src="mail/jqBootstrapValidation.min.js"></script>
-<script src="mail/contact.js"></script>
+<script src="/web/mail/jqBootstrapValidation.min.js"></script>
+<script src="/web/mail/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="/web/js/main.js"></script>
 </body>
 </html>

@@ -289,29 +289,29 @@
                             </div>
 
                             <div th:if="${id} != 0">
-                                <input type="hidden" class="form-control" id="exampleInputEnabled" th:field="*{id}">
+                                <input type="hidden" class="form-control" id="exampleInputEnabled2" th:field="*{id}">
                             </div>
 
                             <div th:if="${user.id} != 0">
                                 <div class="form-group">
                                     <label for="exampleInputPhonenumber">Trạng thái hoạt động</label>
                                     <div th:if="${user.enabled} == 1">
-                                        <lable for="exampleInputEnabled">
-                                            <input type="radio" id="exampleInputEnabled" name="enabled" th:value="1" checked>
+                                        <lable for="exampleInputEnabled3">
+                                            <input type="radio" id="exampleInputEnabled3" name="enabled" th:value="1" checked>
                                             Hoạt động
                                         </lable>
-                                        <lable for="exampleInputEnabled">
-                                            <input type="radio" id="exampleInputEnabled" name="enabled" th:value="0">
+                                        <lable for="exampleInputEnabled1">
+                                            <input type="radio" id="exampleInputEnabled1" name="enabled" th:value="0">
                                             Không Hoạt động
                                         </lable>
                                     </div>
                                     <div th:if="${user.enabled} == 0">
-                                        <lable for="exampleInputEnabled">
-                                            <input type="radio" id="exampleInputEnabled" name="enabled" th:value="1">
+                                        <lable for="exampleInputEnabled4">
+                                            <input type="radio" id="exampleInputEnabled4" name="enabled" th:value="1">
                                             Hoạt động
                                         </lable>
-                                        <lable for="exampleInputEnabled">
-                                            <input type="radio" id="exampleInputEnabled" name="enabled" th:value="0" checked>
+                                        <lable for="exampleInputEnabled5">
+                                            <input type="radio" id="exampleInputEnabled5" name="enabled" th:value="0" checked>
                                             Không Hoạt động
                                         </lable>
                                     </div>
@@ -321,8 +321,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputPhonenumber">Trạng thái hoạt động</label>
                                     <div>
-                                        <lable for="exampleInputEnabled">
-                                            <input type="radio" id="exampleInputEnabled" name="enabled" th:value="1">
+                                        <lable for="exampleInputEnabled6">
+                                            <input type="radio" id="exampleInputEnabled6" name="enabled" th:value="1">
                                             Hoạt động
                                         </lable>
                                         <lable for="exampleInputEnabled">

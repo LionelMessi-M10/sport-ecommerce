@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "categories")
 public class CategoryEntity {
@@ -15,16 +21,13 @@ public class CategoryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Lob
-	@Column(name = "image", columnDefinition = "BYTEA")
-	private String image;
-	
 	@Column(name = "category_name")
 	private String categoryName;
-	
+
 	@Column(name = "active")
 	private Integer active;
-	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntities")
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntities", cascade = { CascadeType.MERGE,
+			CascadeType.PERSIST })
 	private List<ProductEntity> productEntities = new ArrayList<>();
 }

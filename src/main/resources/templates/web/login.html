@@ -20,11 +20,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="/shop/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="/shop/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/shop/css/style.css" rel="stylesheet">
+    <link href="/web/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -190,16 +190,15 @@
 
         <div class="row justify-content-md-center">
             <div class="card-wrapper col-12 col-md-4 mt-5">
-                <div class="brand text-center mb-3">
-                    <a href="/"><img src="/shop/img/logo.png" alt="icon login"></a>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <form th:action="@{/authenticateTheUser}" method="POST">
-                            <h4 class="card-title">Login</h4>
+                            <div align="center"><h4 class="card-title">Login</h4></div>
                             <!-- Neu loi dang nhap thi hien thi tai day-->
-                            <span id="errorMessage" style="color: red;"
-                                  th:text="${param.error} ? 'Username or Password is incorrect. Login again !' : ''"></span>
+                            <div align="center">
+                                <span id="errorMessage" style="color: red;"
+                                      th:text="${param.error} ? 'Username or Password is incorrect. Login again !' : ''"></span>
+                            </div>
 
                             <div class="form-group">
                                 <label for="text">Username</label>
@@ -213,7 +212,7 @@
                                 <input id="password" type="password" class="form-control" name="password" required=""
                                        placeholder="Type your password">
                                 <div class="text-right">
-                                    <a href="password-reset.html" class="small">
+                                    <a href="/shop/password-reset" class="small">
                                         Forgot Your Password?
                                     </a>
                                 </div>
@@ -235,7 +234,7 @@
                             </div>
                         </form>
                         <div class="text-center mt-3 small">
-                            Don't have an account? <a href="/shop/register">Register</a>
+                            Don't have an account? <a th:href="@{/shop/register}">Register</a>
                         </div>
                     </div>
                 </div>
@@ -326,15 +325,15 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="/shop/lib/easing/easing.min.js"></script>
-<script src="/shop/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/web/lib/easing/easing.min.js"></script>
+<script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Contact Javascript File -->
-<script src="/shop/email/jqBootstrapValidation.min.js"></script>
-<script src="/shop/email/contact.js"></script>
+<script src="/web/email/jqBootstrapValidation.min.js"></script>
+<script src="/web/email/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="/shop/js/main.js"></script>
+<script src="/web/js/main.js"></script>
 </body>
 
 </html>

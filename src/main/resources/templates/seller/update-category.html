@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sửa loại sản phẩm</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon/icon-shop.png" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/seller/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/seller/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/seller/css/AdminLTE.css">
+    <link rel="stylesheet" href="/seller/css/_all-skins.min.css">
+    <link rel="stylesheet" href="/seller/css/jquery-ui.css">
+    <link rel="stylesheet" href="/seller/css/style.css" />
+    <script src="/seller/js/angular.min.js"></script>
+    <script src="/seller/js/app.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <header th:replace="seller/layout/header :: header"></header>
+
+        <!-- =============================================== -->
+
+        <!-- Left side column. contains the sidebar -->
+        <aside th:replace="seller/layout/sidebar :: sidebar"></aside>
+
+        <!-- =============================================== -->
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Quản lý Loại Sản Phẩm
+                </h1>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Default box -->
+                <div class="col-md-8">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Cập nhật Loại Sản Phẩm</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form th:action="@{/seller/edit-category}" method="POST" th:object="${category}" role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">ID</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{id}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên loại sản phẩm</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{categoryName}">
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                <a th:href="@{/seller/category-list}" class="btn btn-danger">Hủy</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery 3 -->
+
+    <script src="/seller/js/jquery.min.js"></script>
+    <script src="/seller/js/jquery-ui.js"></script>
+    <script src="/seller/js/bootstrap.min.js"></script>
+    <script src="/seller/js/adminlte.min.js"></script>
+    <script src="/seller/js/dashboard.js"></script>
+    <script src="/seller/js/function.js"></script>
+</body>
+
+</html>
