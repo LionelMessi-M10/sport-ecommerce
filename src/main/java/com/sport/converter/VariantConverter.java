@@ -1,6 +1,8 @@
 package com.sport.converter;
 
-import org.modelmapper.ModelMapper;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.sport.entity.VariantEntity;
@@ -9,14 +11,21 @@ import com.sport.model.dto.ProductDTO;
 @Component
 public class VariantConverter {
 
-  private final ModelMapper modelMapper;
+  public List<VariantEntity> convertVariantEntity(ProductDTO productDTO){
+    List<VariantEntity> variantEntities = new ArrayList<>();
 
-  public VariantConverter(ModelMapper modelMapper){
-    this.modelMapper = modelMapper;
-  }
+    for(String size : productDTO.getSize()){
+      VariantEntity variantEntity = new VariantEntity();
+      variantEntity.setSize(size);
+      variantEntities.add(variantEntity);
+    }
 
-  public VariantEntity convertVariantEntity(ProductDTO productDTO){
-    VariantEntity variantEntity = modelMapper.map(productDTO, VariantEntity.class);
-    return variantEntity;
+    for(String color : productDTO.getColorPro()){
+      for(VariantEntity item : variantEntities){
+        item.setColorPro(color);
+      }
+    }
+
+    return variantEntities;
   }
 }

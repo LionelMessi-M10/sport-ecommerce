@@ -70,22 +70,23 @@
                     <th>Loại</th>
                     <th>Đơn Giá</th>
                     <th>Số Lượng</th>
+                    <th>Trạng thái</th>
                     <th>Tùy chọn</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:each="product : ${productPage.content}">
-                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.productName}"></td>
                     <td>
-                      <img class="my-product-image" style="height: 40px; width: 40px;" alt="" th:src="${product.image}">
+                      <img class="my-product-image" style="height: 40px; width: 40px;" alt="" th:src="@{'/images/'+${product.image}}"/>
                     </td>
-                    <td th:text="${product.category.name}"></td>
-                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.categoryEntities[0].categoryName}"></td>
+                    <td th:text="${product.regularPrice} - ${product.discountPrice}"></td>
                     <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.published == 1 ? 'Đang bán' : 'Ngừng bán'}"></td>
                     <td>
                       <a th:href="@{/seller/edit-product(id=${product.id})}" class="btn btn-success">Sửa</a>
-                      <a th:href="@{/seller/delete-product(id=${product.id})}" class="btn btn-danger"
-                        onclick="return confirm('Bạn có chắc chắn xóa sản phẩm này không?');">Xóa</a>
+                      <button class="btn btn-danger" th:onclick="'deleteProduct(' + ${product.id} + ')'">Xóa</button>
                     </td>
                   </tr>
                 </tbody>
@@ -125,6 +126,43 @@
   <script src="/seller/js/adminlte.min.js"></script>
   <script src="/seller/js/dashboard.js"></script>
   <script src="/seller/js/function.js"></script>
+
+  <!-- <script th:inline="javascript">
+    function deleteProduct(productId) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
+            var url = '/seller/delete-product/' + productId; // Thay đổi URL theo định dạng của bạn
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                success: function(response) {
+                    // Xóa sản phẩm thành công, có thể thực hiện các thao tác cập nhật giao diện ở đây
+                    console.log('Sản phẩm đã được xóa thành công');
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi nếu có
+                    console.error('Lỗi khi xóa sản phẩm:', error);
+                }
+            });
+        }
+    }
+  </script> -->
+
+  <script th:inline="javascript">
+    function deleteProduct(productId) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
+            var url = '/seller/delete-product/' + productId;
+            var xhr = new XMLHttpRequest();
+            xhr.open('DELETE', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                  window.location.href="http://localhost:8080/seller/product-list";
+                }
+            };
+            xhr.send();
+        }
+    }
+  </script>
+
 </body>
 
 </html>

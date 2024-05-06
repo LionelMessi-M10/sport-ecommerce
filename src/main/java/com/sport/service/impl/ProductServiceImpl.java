@@ -1,5 +1,16 @@
 package com.sport.service.impl;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sport.converter.ProductConverter;
 import com.sport.entity.ImageProductEntity;
 import com.sport.entity.ProductEntity;
@@ -10,16 +21,6 @@ import com.sport.service.ProductService;
 import com.sport.service.UploadService;
 
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
         List<ImageProductEntity> imageProductEntities = new ArrayList<>();
 
         for(MultipartFile item : imageProduct){
-            String pathImage = this.uploadService.handleSaveUploadFile(item, "product-images");
+            String pathImage = this.uploadService.handleSaveUploadFile(item, "images");
             productEntity.setImage(pathImage);
 
             ImageProductEntity imageProductEntity = new ImageProductEntity();

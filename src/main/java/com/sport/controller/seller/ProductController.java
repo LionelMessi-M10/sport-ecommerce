@@ -1,5 +1,20 @@
 package com.sport.controller.seller;
 
+import java.text.ParseException;
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.sport.converter.ProductConverter;
 import com.sport.entity.CategoryEntity;
 import com.sport.entity.ProductEntity;
 import com.sport.entity.UserEntity;
@@ -8,16 +23,6 @@ import com.sport.service.CategoryService;
 import com.sport.service.ProductService;
 import com.sport.service.UserService;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.text.ParseException;
-import java.util.List;
-
 @Controller
 @RequestMapping("/seller")
 public class ProductController {
@@ -25,11 +30,13 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final UserService userService;
+    private final ProductConverter productConverter;
 
-    public ProductController(CategoryService categoryService, ProductService productService, UserService userService) {
+    public ProductController(CategoryService categoryService, ProductService productService, UserService userService, ProductConverter productConverter) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.userService = userService;
+        this.productConverter = productConverter;
     }
 
     @GetMapping("/add-product")
@@ -43,7 +50,7 @@ public class ProductController {
 
     @PostMapping("/add-product")
     public String handleSaveProduct(@ModelAttribute("productDTO") ProductDTO productDTO,
-                              @RequestParam("imageProduct") MultipartFile[] imageProducts) throws ParseException {
+                            @RequestParam("imageProduct") MultipartFile[] imageProducts) throws ParseException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -60,10 +67,19 @@ public class ProductController {
     @GetMapping("/edit-product")
     public ModelAndView editProduct(@RequestParam("id") Long id){
         ModelAndView mav = new ModelAndView("seller/edit-product");
-        ProductEntity product = productService.findById(id);
-        List<CategoryEntity> categories = categoryService.findAll();
-        mav.addObject("product", product);
-        mav.addObject("categories", categories);
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        if(authentication != null && authentication.isAuthenticated()){
+            UserEntity userEntity = this.userService.getByUsername(authentication.getName());
+            ProductEntity product = productService.findById(id);
+            ProductDTO productDTO = this.productConverter.convertToDTO(product, userEntity);
+            List<CategoryEntity> categories = categoryService.findAll();
+            mav.addObject("productDTO", productDTO);
+            mav.addObject("categories", categories);
+        }
+        else mav = new ModelAndView("shop/login");
+        
         return mav;
     }
 

@@ -1,44 +1,51 @@
 package com.sport.service.impl;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sport.service.UploadService;
 
 @Service
-public class UploadServiceImpl implements UploadService{
+public class UploadServiceImpl implements UploadService {
 
+    private final ResourceLoader resourceLoader;
+
+    public UploadServiceImpl(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @Override
     public String handleSaveUploadFile(MultipartFile file, String targetFolder) {
         String fileNameUpload = "";
 
         try {
-            String rootPath = "D:/Workspace_STS4/Sport-Ecommerce/ecommerce-images";
+            String rootPath = resourceLoader.getResource("classpath:static").getFile().getAbsolutePath();
 
             byte[] bytes = file.getBytes();
 
-            File dir = new File(rootPath + File.separator + targetFolder);
-            if (!dir.exists())
-                dir.mkdirs();
+            // Tạo thư mục target nếu chưa tồn tại
+            Path targetPath = Paths.get(rootPath, targetFolder);
+            if (!Files.exists(targetPath)) {
+                Files.createDirectories(targetPath);
+            }
 
             fileNameUpload = System.currentTimeMillis() + "-" + file.getOriginalFilename();
 
-            // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath() + File.separator + fileNameUpload);
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
+            // Lưu file vào thư mục target
+            File serverFile = new File(targetPath.toFile(), fileNameUpload);
+            FileCopyUtils.copy(bytes, serverFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        // System.out.println(fileNameUpload);
         return fileNameUpload;
     }
-
 }

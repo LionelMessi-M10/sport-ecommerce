@@ -1,9 +1,11 @@
 package com.sport.model.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -35,7 +37,7 @@ public class ProductDTO {
     private String couponEndDate;
 
     // Variant Entity
-    private String size;
-    private String colorPro;
+    private List<String> size;
+    private List<String> colorPro;
 
 }
